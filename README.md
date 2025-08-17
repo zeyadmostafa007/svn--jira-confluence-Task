@@ -1,89 +1,70 @@
-# SVN
+# Jira & Confluence
 
-## What is SVN?
-SVN (Apache Subversion) is a centralized **version control system** that tracks changes to files and folders over time. Teams use it to collaborate safely, maintain history, and ship software with confidence.
-
-## Why do software teams use SVN?
-- **Single Source of Truth:** A central repository ensures everyone pulls from the same place.
-- **Change History & Auditing:** Every change is recorded with author, time, and message.
-- **Stable Release Lines:** Trunk/branches/tags support release management and hotfixes.
-- **Access Control:** Centralized auth and permissions are straightforward to manage.
-- **Works with Binary Assets:** Common in legacy or enterprise workflows (e.g., docs, design files).
+## What are Jira & Confluence?
+- **Jira** is a work management and issue tracking tool for software teams. It organizes **issues** (stories, tasks, bugs) into **backlogs**, **sprints**, and **boards**, enabling planning, tracking, and delivery.  
+- **Confluence** is a collaborative documentation platform for creating **pages** inside **spaces**. Teams use it as a knowledge base, documentation hub, and a single place for specs and runbooks.
 
 ---
 
-## Core Concepts & Keywords
-- **Repository (repo):** Central database storing all files and history.
-- **Working Copy:** Your local checkout of the repository files.
-- **Trunk:** The main line of development (like `main` in Git).
-- **Branch:** A copy of code for isolated work (features, experiments, hotfixes).
-- **Tag:** A read-only snapshot (e.g., `v1.0`) for releases/milestones.
-- **Checkout (`svn checkout`):** Create a local working copy from the repo.
-- **Update (`svn update`):** Pull the latest changes into your working copy.
-- **Add (`svn add`):** Stage a new file/folder for versioning.
-- **Commit (`svn commit`):** Save (publish) your changes to the repository.
-- **Revert (`svn revert`):** Discard local changes in your working copy.
-- **Merge (`svn merge`):** Bring changes from one branch (or revision range) into another.
-- **Resolve:** Fix conflicts when the same lines changed in parallel.
-- **Revision:** A global version number for the entire repository state.
-- **SVN Layout (convention):** Top-level `trunk/`, `branches/`, `tags/` folders.
+## Why do software teams use them together?
+- **Traceability:** Link Jira issues to Confluence specs, runbooks, and decision records.  
+- **Visibility:** Confluence explains the “why”; Jira shows the “what/when/who”.  
+- **Delivery flow:** Plan in Confluence → track in Jira → document results in Confluence.  
+- **Onboarding:** New engineers get context quickly.
 
 ---
 
-## Minimal Hands-On Demo (Local, Lightweight)
+## Core Concepts & Keywords (Jira)
+- **Issue:** A unit of work (Story, Task, Bug, Epic).  
+- **Epic:** A large body of work composed of many issues.  
+- **Story:** A user-facing requirement, often with acceptance criteria.  
+- **Task:** A technical to-do item.  
+- **Bug:** A defect that needs fixing.  
+- **Backlog:** Ordered list of issues not yet in a sprint.  
+- **Sprint:** A fixed timebox (e.g., 2 weeks) where a team commits to deliver items.  
+- **Board:** Visual view (Scrum/Kanban) of issues by status/column.  
+- **Workflow:** Statuses and transitions an issue follows.  
+- **Assignee / Reporter:** Who works on it / who created it.  
+- **Priority / Story Points:** Effort/urgency indicators.  
+- **JQL:** Jira Query Language for searching issues.
 
-> Goal: Create a local SVN repository, add a file, commit, branch, and merge—no server required.  
-> Prerequisite: Install the Subversion CLI (e.g., `svn` and `svnadmin`).
+---
 
-### 1) Create a local repository
+## Core Concepts & Keywords (Confluence)
+- **Space:** Top-level area grouping related pages.  
+- **Page:** A document within a space.  
+- **Templates:** Predefined structures (Requirements, Runbook, etc.).  
+- **Hierarchy:** Pages with parent/child structure.  
+- **Macros:** Dynamic content (TOC, Jira Issues list).  
+- **Permissions:** Control access per space/page.  
+- **Comments & History:** Collaboration and versioning.  
+- **Labels & Attachments:** For organization and supporting files.
 
-svnadmin create /tmp/demo-svn-repo
-svn mkdir file:///tmp/demo-svn-repo/trunk -m "Create trunk"
-svn mkdir file:///tmp/demo-svn-repo/branches -m "Create branches"
-svn mkdir file:///tmp/demo-svn-repo/tags -m "Create tags"
+---
 
-### 2) Checkout the trunk
-mkdir -p ~/work && cd ~/work
-svn checkout file:///tmp/demo-svn-repo/trunk demo-wc
-cd demo-wc
+## Practical Demo: Jira
 
-### 3) Add and commit a file
-echo "# Hello SVN" > README.txt
-svn add README.txt
-svn commit -m "Add README.txt with greeting"
+> Goal: Create a story, plan a sprint, and move it across statuses.  
+> Prerequisite: Access to a Jira project.
 
-### 4) Create a branch and merge
-# Create branch
-svn copy file:///tmp/demo-svn-repo/trunk \
-         file:///tmp/demo-svn-repo/branches/feature-hello \
-         -m "Create feature branch"
+1. **Create Story**
+   - Title: `As a user, I can reset my password`  
+   - Description:  
+     - Acceptance Criteria: reset email sent, token expires in 15m.  
+   - Priority: Medium, Story Points: 3.
 
-# Work on branch
-svn checkout file:///tmp/demo-svn-repo/branches/feature-hello feature-wc
-cd feature-wc
-echo "Added from branch" >> README.txt
-svn commit -m "Update README in branch"
+2. **Plan in Backlog**
+   - Place in Sprint `Sprint 1 (Demo)`.
 
-# Merge back into trunk
-cd ~/work/demo-wc
-svn merge ^/branches/feature-hello
-svn commit -m "Merge feature-hello into trunk"
+3. **Start Sprint**
+   - Duration: 1–2 weeks.
 
+4. **Work the Issue**
+   - Move across `To Do → In Progress → Done`.  
+   - Assign to yourself, add a comment.
 
-### 5) Create a tag
-svn copy file:///tmp/demo-svn-repo/trunk \
-         file:///tmp/demo-svn-repo/tags/v0.1 \
-         -m "Tag v0.1 release"
+5. **Add Sub-task**
+   - Example: `Implement password reset API`.
 
-### Example Outputs
-
-  ## SVN Log
-Shows the history of commits for a file or project.
-![SVN Log Output](images/svn-log.PNG)
-
-  ## SVN Blame 
-
-Shows which user last modified each line of a file.
-![SVN Blame Output](images/blame-README.PNG)
-
-
+6. **Close the Story**
+   - Transition to Done, add resolution.
