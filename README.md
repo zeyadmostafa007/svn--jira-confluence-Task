@@ -3,7 +3,7 @@
 ## What is SVN?
 SVN (Apache Subversion) is a centralized **version control system** that tracks changes to files and folders over time. Teams use it to collaborate safely, maintain history, and ship software with confidence.
 
-## Why do DevOps & software teams use SVN?
+## Why do software teams use SVN?
 - **Single Source of Truth:** A central repository ensures everyone pulls from the same place.
 - **Change History & Auditing:** Every change is recorded with author, time, and message.
 - **Stable Release Lines:** Trunk/branches/tags support release management and hotfixes.
@@ -84,6 +84,6 @@ Shows the history of commits for a file or project.
   ## SVN Blame 
 
 Shows which user last modified each line of a file.
-![SVN Blame Output](images/blame-README.png)
+![SVN Blame Output](images/blame-README.PNG)
 
 
