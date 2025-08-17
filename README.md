@@ -1,4 +1,4 @@
-# SVN (Apache Subversion) — Beginner-Friendly Guide for DevOps Learners
+# SVN
 
 ## What is SVN?
 SVN (Apache Subversion) is a centralized **version control system** that tracks changes to files and folders over time. Teams use it to collaborate safely, maintain history, and ship software with confidence.
@@ -78,11 +78,12 @@ svn copy file:///tmp/demo-svn-repo/trunk \
 ### Example Outputs
 
   ## SVN Log
-    Shows the history of commits for a file or project.
-    ![SVN Log Output](images/svn-log.PNG)
+Shows the history of commits for a file or project.
+![SVN Log Output](images/svn-log.PNG)
 
   ## SVN Blame 
-    Shows which user last modified each line of a file.
-    ![SVN Blame Output](images/blame-README.png)
+
+Shows which user last modified each line of a file.
+![SVN Blame Output](images/blame-README.png)
 
 
